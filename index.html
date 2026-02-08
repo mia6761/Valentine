@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4d6d, #ffb3c6);
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: white;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 8px #c9184a;
+    }
+
+    button {
+      font-size: 1.3em;
+      padding: 14px 35px;
+      margin: 20px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.15);
+    }
+
+    #yes {
+      background-color: #fff;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    #no {
+      background-color: #c9184a;
+      color: white;
+      position: absolute;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      font-size: 1.3em;
+      color: white;
+      line-height: 2;
+      background: rgba(255,255,255,0.2);
+      padding: 30px;
+      border-radius: 25px;
+      margin-top: 20px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.4);
+    }
+
+    /* hearts */
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      animation: floatUp 3s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    /* confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background-color: red;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(600px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="container" id="page1">
+    <h1>Will you be my Valentine?<br>MuchuPuchu 💕</h1>
+    <button id="yes">YES 💖</button>
+    <button id="no">NO 😐</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="container hidden" id="page2">
+    <h1>OMG THANK YOU SO MUCH 💘</h1>
+    <div class="message">
+      (you didn’t have a no option 😉)<br><br>
+
+      Even though it is Valentine’s Day,  
+      I don’t need a day to tell me to love you 🥺💗  
+      very cheesy omg, but yeah 😭💕<br><br>
+
+      I appreciate you a lot,  
+      for just existing, and for being there for me.  
+      i love you ml 💖
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 40; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.top = "-10px";
+        confetti.style.backgroundColor =
+          ["#ff4d6d", "#ffb3c6", "#fff"][Math.floor(Math.random() * 3)];
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+
+    function launchHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+
+    yesBtn.addEventListener("click", () => {
+      page1.classList.add("hidden");
+      page2.classList.remove("hidden");
+      launchConfetti();
+      launchHearts();
+    });
+  </script>
+
+</body>
+</html>
